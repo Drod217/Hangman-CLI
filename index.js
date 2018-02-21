@@ -5,11 +5,15 @@ var letter = require('./letter.js');
 var inquirer = require('inquirer');
 
 console.log('\n');
+console.log('\n');
 console.log('********************************************************************');
+console.log('\n');
 console.log('\n');
 console.log('GREEK GODS HANGMAN! Can you guess correctly?');
 console.log('\n');
+console.log('\n');
 console.log('********************************************************************');
+console.log('\n');
 console.log('\n');
 
 var hangman = {
