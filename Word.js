@@ -1,11 +1,13 @@
 var letter = require('./Letter.js');
 
 var wordLogic = function(currentWord) {
+    // word to be guessed
     this.word = currentWord;
+    // array
     this.letterArray = [];
     this.correct = false;
 
-    
+    // words into letter
     this.splitWord = function() {
         for (var i = 0; i < this.word.length; i++) {
             this.letterArray.push(new letter.Letter(this.word[i]));
@@ -13,7 +15,7 @@ var wordLogic = function(currentWord) {
         
     };
 
-    
+    // ENDGAME 
     this.checkWordGuess = function() {
         var letterRight = 0;
 
@@ -32,7 +34,7 @@ var wordLogic = function(currentWord) {
         return this.correct;
     };
 
-    
+    // if letter is there show the letter
     this.letterFound = function (guessPrompt) {
         var numberFound = 0;
         for (var i = 0; i < this.letterArray.length; i++) {
@@ -41,11 +43,11 @@ var wordLogic = function(currentWord) {
                 numberFound += 1;
             };
        };
-       
+       // how many letters found
        return numberFound;
     };
     
-    
+    // words and letters
     this.wordGuessResult = function () {
         var line = '';
         for (var i = 0; i < this.letterArray.length; i++) {
@@ -55,4 +57,6 @@ var wordLogic = function(currentWord) {
     };
 };
 
+
+//export needed for index.js
 exports.wordLogic = wordLogic;

@@ -21,13 +21,15 @@ var hangman = {
     wordChosen: null,
     startGame: function(word) {
         this.guessesLeft = 10;
+        // pulls from Ganswers 
         this.wordChosen = new wordLogic.wordLogic(wordBank);
+        // words into array
         this.wordChosen.splitWord();
         
         
         console.log('Result: ' + this.wordChosen.wordGuessResult());
         console.log('\n');
-
+        // prompt for guess
         this.promptPlayer();
     },
     promptPlayer: function() {
@@ -39,10 +41,11 @@ var hangman = {
                 message: "Guess a letter!"
             }
         ]).then(function(answer) {
-
+            // accounting for error, undefined letter 
             if (this.lettersGuessed === undefined) {
                 this.lettersGuessed = answer.guessPrompt + ", ";
             } else {
+                
                 this.lettersGuessed += answer.guessPrompt.toString() + ", ";
             };
             
@@ -50,13 +53,14 @@ var hangman = {
             var guessResult = referred.wordChosen.letterFound(answer.guessPrompt);
             console.log('-------------------------------------------------------------------');
 
+            // wrong guess
             if (guessResult === 0) {
                 console.log('May Tyche favor your next guess!!')
                 referred.guessesLeft -= 1; 
             } else if (guessResult !== 0) {
                 console.log('Woot!')
                 console.log('-------------------------------------------------------------------');
-
+                // guessed word correctly.
                 if (referred.wordChosen.checkWordGuess()) {
                     console.log('-------------------------------------------------------------------');
                     console.log('\n');
@@ -79,9 +83,10 @@ var hangman = {
             console.log('Letters guessed: ' + this.lettersGuessed);
             console.log('\n');
             console.log('-------------------------------------------------------------------');
-
+            // wrong guess on word, gives answer back
             if ((referred.guessesLeft > 0) && (referred.wordChosen.correct === false)){
-		    	referred.promptPlayer();
+                referred.promptPlayer();
+            // accounts for letters guessed
             } else if (referred.guessesLeft === 0) {
                 console.log('\n');
                 console.log("Athena favors you, the word was: '" + referred.wordChosen.word + "'. Next time!");
@@ -95,5 +100,5 @@ var hangman = {
         });
     },
 };
-
+//code is ran to start game
 hangman.startGame();
